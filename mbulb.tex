@@ -7,6 +7,9 @@
 \date{\today}
 \author{Paolo Bonzini}
 
+\let\vec\mathbf
+\def\q#1{\vec#1}
+
 \begin{document}
 \maketitle
 
@@ -73,10 +76,10 @@ distance $\rho$ from the origin, and the angle $\theta$ between the
 positive $x$ axis and the point.  This complex number can be written
 compactly as $\rho e^{i \theta}$, and the geometric interpretation
 of multiplication is derived as follows:
-\begin{displaymath}
+\begin{equation*}
   \rho e^{i \theta} =  \rho_1 e^{i \theta_1} \cdot \rho_2 e^{i \theta_2}
     = \rho_1\rho_2 e^{i (\theta_1 + \theta_2)}
-\end{displaymath}
+\end{equation*}
   
 \noindent
 The result of the multiplication $z_1 z_2$ is a point that is obtained
@@ -191,12 +194,12 @@ since
 
 \noindent
 the following definition of multiplication seems natural:
-
-\noindent
-\begin{displaymath}
+\begin{equation*}
   (\rho_1,\theta_1,\phi_1) (\rho_2,\theta_2,\phi_2)=
   (\rho_1+\rho_2,\theta_1+\theta_2,\phi_1+\phi_2)
-\end{displaymath}
+\end{equation*}
+
+\noindent
 However, this attempt too seemed stuck against a dead end once the
 proposed algebra started to show more and more annoying differences
 from standard mathematical concepts.  For example, properly
@@ -223,16 +226,16 @@ linear transformations of an arbitrary vector space, including for
 example those that do not preserve angles.  Any of the three equations
 in the previous section could indeed be converted to a 3x3 matrix $R$,
 and the resulting iteration would have this shape:
-\begin{displaymath}
+\begin{equation*}
   (\rho,\theta,\phi)^n = R(\theta,\phi)^n (\rho^n,0,0)
-\end{displaymath}
+\end{equation*}
 
 \noindent
 Even better, the scaling operation could be included in the transformation
 matrix like this:
-\begin{displaymath}
+\begin{equation*}
   (\rho,\theta,\phi)^n = R(\rho,\theta,\phi)^n (1,0,0)
-\end{displaymath}
+\end{equation*}
 \noindent
 under the following conditions:
 \begin{itemize}
@@ -247,7 +250,87 @@ represented by a quaternion $q$.  \emph{Note that the operation that
   will still result in a Mandelbulb} rather than the disappointing
 quaternion Julia sets.
 
-\dots
+\emph{Unit quaternions}, that is quaternions whose norm is 1, represent
+the space of 3D rotations in a simple way.  For the purpose of this paper,
+it will suffice to show how to describe a rotation by a quaternion,
+without explaining the theory behind this.  $\vec{v}$ will indicate a
+quaternion with a zero scalar part, that is $x\vec{i}+y\vec{j}+z\vec{k}$;
+the rotation by an angle $\alpha$ around axis is then represented by the
+following quaternion:
+\begin{equation*}
+q = \cos \frac\alpha2 + \vec{v} \sin \frac\alpha2
+\end{equation*}
+
+The rotation is clockwise if our line of sight points in the same
+direction as $\vec{v}$.  A rotation $q$ can be applied to a vector
+$\vec{w}$ by computing two quaternion multiplications, specifically
+$q\vec{v}q^{-1}$.
+
+Rotations can be composed by multiplying two quaternions; ordering
+counts, since multiplication is noncommutative.  However, quaternion
+multiplication is associative, hence $q^n$ is well defined as a rotation
+by $n$ times the angle around the same axis as $q$.
+
+These formulas of course work in 2D too; in this case, in order to remain
+in the $xy$ plane the point must be of the form $x\vec{i}+y\vec{j}$,
+and the rotation quaternion must be of this form:
+\begin{equation*}
+q = \cos \frac\alpha2 + \vec{k} \sin \frac\alpha2
+\end{equation*}
+
+\noindent
+which is more compactly written $e^{\vec{k}\alpha/2}$.
+A somewhat nontraditional expression of the Mandelbrot set then would
+be the following.  Let $\vec{v}=x\vec{i}+y\vec{j}$ be a point on
+the $xy$ plane, and $(\rho,\theta)$ its polar representation.  Then,
+it's possible to write $\vec{v}$ and $\vec{v^2+c}$ from $\rho$ and $\theta$ as follows:
+\begin{equation*}
+\vec{v}=\rho e^{\vec{k}\frac \theta2} \vec{i} e^{-\vec{k}\frac \theta2}
+\end{equation*}
+\begin{equation*}
+\vec{v}^2+c=\rho^2 e^{i\vec{k}\theta} \vec{i} e^{-\vec{k}\theta}+\vec{c}
+\end{equation*}
+
+But this can complicated expression can be simplified
+noticeably.  For unit quaternions, $q^{-1}=\bar q$:
+inversion and conjugation are the same operation, and $q\vec{i}q^{-1}$ can
+also be written $q\vec{i}\bar q$.  When the modulus is not one, instead,
+$q\vec{i}\bar q = |q|^2 q^{-1}\vec{i}q$.  Then, we can put
+
+\begin{equation*}
+q = \rho e^{i\vec{k}\theta} = x + y\vec{k} = -\vec{v}\vec{i}
+\end{equation*}
+\begin{equation*}
+\vec{v}^2+c=q \vec{i} \bar q+\vec{c}
+\end{equation*}
+
+\noindent
+Changing the sign of $q$ does not affect the effect of the rotation,
+and allows a small simplification.  For the classic Mandelbrot set,
+therefore, the iteration formula will be:
+\begin{equation*}
+\vec{v}=q \vec{i} \bar q+\vec{c}\text{, }q=\vec{v}\vec{i}.
+\end{equation*}
+
+\noindent
+It is of course possible to generalize to an exponent $n$ other
+than $2$, obtaining
+\begin{equation}
+\label{eq:quat}
+\vec{v}=q^{n/2} \vec{i} \bar q^{n/2}+\vec{c}\text{, }q=-\vec{v}\vec{i}.
+\end{equation}
+
+\noindent
+and finally by substituting and simplifying
+\begin{equation*}
+\vec{v}=v^{n/2} \vec{i} \bar v^{n/2}+\vec{c}
+\end{equation*}
+
+This is the \emph{quaternion formulation of the Mandelbrot set}.  However,
+for the sake of generalizing to 3D, we'll have to take a step back and
+look at equation~\ref{eq:quat} with 3D eyes.
+
+\section{Rethinking the Mandelbulb}
 
 %% \section{Conclusion}
 %% 
