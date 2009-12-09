@@ -16,19 +16,23 @@
 \setstretch{1.05}
 
 \begin{abstract}
-  Daniel White's \emph{Mandelbulb}, with its fractal features on all
-  axes, is possibly the closest existing three-dimensional analogue
-  to the 2D Mandelbrot set.
+  Daniel White's \emph{Mandelbulb}, with its fractal features on all axes,
+  is possibly the closest existing three-dimensional analogue to the 2D
+  Mandelbrot set.
 
-  The classic Mandelbrot set is based on the iteration of $z\leftarrow z^2+c$ in
-  the complex plane, thus the most common 3D extension to the
-  ``Mandelbrot'' set is the iteration of $q\leftarrow q^2+c$ on quaternions.
-  The Mandelbulb, instead, is a three-dimensional extension of a
-  \emph{geometric} interpretation of complex squaring.
-  
+  The classic Mandelbrot set is based on the iteration of $z\leftarrow
+  z^2+c$ in the complex plane, thus the most common 3D extension
+  to the ``Mandelbrot'' set is the iteration of $q\leftarrow q^2+c$
+  on quaternions.  The Mandelbulb, instead, is a three-dimensional
+  extension of a \emph{geometric} interpretation of complex squaring.
+
   In this paper, I propose an alternative explanation of the Mandelbulb
-  iteration formulas based on quaternions, with the hope of adding the
-  necessary mathematical rigor to the discovery of the Mandelbulb.
+  formulas using standard quaternion arithmetic, with the hope of adding
+  the necessary mathematical rigor to the discovery of the Mandelbulb.
+  A novel quaternion formulation is derived for the Mandelbrot iteration
+  formulas; by parameterizing this formula, and appropriately choosing
+  the parameters, the various Mandelbulb fractals are produced without
+  resorting to non-standard algebras.
 \end{abstract}
 
 \section{Introduction}
@@ -313,8 +317,10 @@ and write:
 \end{equation*}
 
 \noindent
-Changing the sign of $q$ does not modify the effect of the rotation,
-and slightly simplifies the iteration.  The iteration formula will then be
+Changing the sign of $q$ does not modify the effect of the
+rotation\footnote{This is true for all quaternions, since quaternions
+  are actually a \emph{double cover} of the space of rotations.}, and
+it slightly simplifies the iteration.  The iteration formula will then be
 the following for the classic Mandelbrot set:
 \begin{equation*}
 \vec{v}\leftarrow q \vec{i} \bar q+\vec{c}\text{ with }q=\vec{v}\vec{i}.
