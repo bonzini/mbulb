@@ -246,7 +246,7 @@ under the following conditions:
 If these two conditions are imposed, however, the transformation (a
 scaling operation followed by a rotation) is more compactly
 represented by a quaternion $q$.  \emph{Note that the operation that
-  will be performed on the quaternion is \emph{not} $q=q^2+c$, so this
+  will be performed on the quaternion is \textbf{not} $q=q^2+c$, so this
   will still result in a Mandelbulb} rather than the disappointing
 quaternion Julia sets.
 
@@ -285,7 +285,7 @@ be the following.  Let $\vec{v}=x\vec{i}+y\vec{j}$ be a point on
 the $xy$ plane, and $(\rho,\theta)$ its polar representation.  Then,
 it's possible to write $\vec{v}$ and $\vec{v^2+c}$ from $\rho$ and $\theta$ as follows:
 \begin{equation*}
-\vec{v}=\rho e^{\vec{k}\frac \theta2} \vec{i} e^{-\vec{k}\frac \theta2}
+\vec{v}=\rho e^{\vec{k}\theta/2} \vec{i} e^{-\vec{k}\theta/2}
 \end{equation*}
 \begin{equation*}
 \vec{v}^2+c=\rho^2 e^{i\vec{k}\theta} \vec{i} e^{-\vec{k}\theta}+\vec{c}
@@ -317,18 +317,19 @@ It is of course possible to generalize to an exponent $n$ other
 than $2$, obtaining
 \begin{equation}
 \label{eq:quat}
-\vec{v}=q^{n/2} \vec{i} \bar q^{n/2}+\vec{c}\text{, }q=-\vec{v}\vec{i}.
+\vec{v}=q^{n/2} \vec{i} \bar q^{n/2}+\vec{c}\text{, }q=\vec{v}\vec{i}.
 \end{equation}
 
 \noindent
 and finally by substituting and simplifying
 \begin{equation*}
-\vec{v}=v^{n/2} \vec{i} \bar v^{n/2}+\vec{c}
+\vec{v}=\vec{v}^{n/2} \vec{i} \vec{\bar v}^{n/2}+\vec{c}
 \end{equation*}
 
-This is the \emph{quaternion formulation of the Mandelbrot set}.  However,
-for the sake of generalizing to 3D, we'll have to take a step back and
-look at equation~\ref{eq:quat} with 3D eyes.
+This is the \emph{quaternion formulation of the Mandelbrot set}; when
+drawn in 3D it results in the ``lathed'' Mandelbrot set.  So, for the
+sake of generalizing to 3D, we'll have to take a step back and look at
+equation~\ref{eq:quat} with 3D eyes.
 
 \section{Rethinking the Mandelbulb}
 
