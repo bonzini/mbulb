@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{To quaternions and back}
+\date{\today}
+\author{Paolo Bonzini}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  Daniel White's \emph{Mandelbulb}, with its fractal features on all
+  axes, is possibly the closest existing three-dimensional analogue
+  to the 2D Mandelbrot set.
+
+  The classic Mandelbrot set is based on the iteration of $z=z^2+c$ in
+  the complex plane, thus the most common 3D extension to the
+  ``Mandelbrot'' set is the iteration of $q=q^2+c$ on quaternions.
+  The Mandelbulb, instead, is a three-dimensional extension of a
+  emph{geometric} interpretation of complex squaring.
+  
+  In this paper, I propose an alternative explanation of the
+  Mandelbulb iteration based on quaternions, with the hope of adding
+  the necessary mathematical rigor to the discovery of the Mandelbulb.
+\end{abstract}
+
+\section{Introduction}
+
+An extension of the Mandelbrot set to three dimension is a kind of
+holy grail for fractalists.  The hurdles are many, because the
+bidimensional and three dimensional spaces are inherently very
+different: there is no true analogue of the complex field in three
+dimensions, that there are no three-dimensional conformal mappings,
+the \emph{hairy ball} theorem\dots and besides all this, the
+expectations for such an object are incredibly high!
+
+There are two main extensions of the Mandelbrot and Julia sets, both
+of them to four dimensions.  One is to use quaternions instead of
+complex numbers.  In order to reduce four dimensions to three, a
+``stack'' of parallel 4D planes is intersected with the object and the
+intersecting voxels are plotted.  The resulting objects possess
+complexity, but not the infinite level of detail shown by the 2D
+Mandelbrot and Julia sets---some of them are basically solids of
+revolution, ``lathed'' versions of the 2D Mandelbrot set.
+
+Another 4D expression of the Mandelbrot set does not use quaternions,
+but rather composes four coordinates from the two parameters of
+the iteration, $z_0$ and $c$.  Then the standard complex iteration
+is used.  The 2D slices of this set are very interesting, since
+they include both the Mandelbrot set (lying on the $z_0=0$ plane)
+and the Julia sets (corresponding to all the constant-$c$ planes).
+However, the 3D slices also fail to provide the infinite detail
+and sheer beauty of their 2D correspondents.
+
+From 2007 to 2009, Daniel White experimented with a new approach to
+the quest, whose resulting fractals he named \emph{Mandelbulbs}.  In
+order to understand it, I should digress shortly and explain some
+properties of complex numbers.  In addition to using a purely
+mathematical description in terms of complex numbers, the Mandelbrot
+set's orbits can also be studied geometrically.  The real and
+imaginary parts $z=a+ib$ are represented on the 2D plane by using the
+real axis as the $x$ axis, and the imaginary as the $y$, and the
+arithmetic operations also have a geometric interpretation.
+
+Addition is obvious.  In order to understand multiplication, complex
+numbers have to be visualized in a different way using \emph{polar}
+coordinates.  The position of a point in a plane is identified by the
+distance $\rho$ from the origin, and the angle $\theta$ between the
+positive $x$ axis and the point.  This complex number can be written
+compactly as $\rho e^{i \theta}$, and the geometric interpretation
+of multiplication is derived as follows:
+\begin{displaymath}
+  \rho e^{i \theta} =  \rho_1 e^{i \theta_1} \cdot \rho_2 e^{i \theta_2}
+    = \rho_1\rho_2 e^{i (\theta_1 + \theta_2)}
+\end{displaymath}
+  
+\noindent
+The result of the multiplication $z_1 z_2$ is a point that is obtained
+from $z_1$ by \emph{stretching it by a factor $\rho_1$}, and
+then \emph{rotating it by an angle $\theta_1$}; and the result of
+squaring is obtained by squaring the distance from the origin and
+double the angle from the positive $x$ axis.
+
+\section{From 2D to 3D}
+
+Daniel White's intuition then was to invent a meaningful way of adding
+and squaring points in 3D space, squaring the distance and somehow
+``doubling'' the angle between the positive $x$ axis and the point in
+exam.  The point is then translated by $c$, and the operation is
+repeated until either the sequence diverges or a given number of
+iterations is reached.
+
+Many things in this scheme work out easily.  For example, Euclidean
+distance in 3D space is similarly enough to 2D that the divergence
+condition is the same: as soon as the distance of $z$ from the origin
+exceeds 2, the iteration can be interrupted.  Other things are instead
+noticeably different.  For example, it is hard to define the effect of
+squaring on angles.  3D space can be described in \emph{spherical
+  coordinates} that couple a distance and \emph{two}
+angles---corresponding to two rotations around two different axes.
+However, rotations in 3D space are \emph{not} commutative.  In fact,
+applying White's idea but choosing different angles and axes gives
+rise to very different fractals.
+
+On top of this, there is some uneasiness due to the fact that 3D
+complex numbers were sought by mathematicians for decades and in the
+end they settled for four-component quaternions, despite some strange
+properties such as \emph{noncommutative multiplication}.  The infinite
+possible ways to define the 3D rotation give the feeling of banging
+one's head against dead ends.  Searching for the properties of
+three-component numbers whose multiplication is (or seems to be)
+commutative, feels too much like a 21st century version of squaring
+the circle.
+
+Nevertheless, nothing suggested White's construction to be
+fundamentally flawed, and it produced (very) nice pictures, especially
+when the $z^2+c$ was tweaked to include higher exponents.  This is a
+winning combination for the fractalists, which proceeded to experiment
+with many different definitions of rotation.  For all of them, the
+Mandelbulb iteration with exponent $n$ is then obtained by the
+following steps:
+\begin{enumerate}
+\item \label{item:first-step}
+  compute the spherical coordinates $(\rho,\theta,\phi)$ of the
+  point $c=(x_c,y_c,z_c)$ being examined\footnote{Unfortunately,
+    parenthesized triples may refer throughout the remainder of this
+    section to both cartesian and spherical coordinates.  In general,
+    the presence of Greek letters such as $\rho$, $\theta$, $\phi$ or
+    $\pi$ will mean that a particular occurrence refers to spherical
+    coordinates.};
+
+\item \label{item:choice} compute the rotation corresponding to a
+  point---remember that complex squaring, by doubling the
+  polar-coordinates angle, applies a different rotation for different
+  points;
+
+\item \label{item:last-step}
+  apply the rotation $n$ times to the point $(\rho^n,0,0)$;
+\item translate the result by $c$.
+\end{enumerate}
+
+The urge to write this in a form that resembles Julia and Mandelbrot's
+$z=z^n+c$ is hard to resist, so White defined $z^n$ in 3D space as
+applying steps \ref{item:first-step}--~\ref{item:last-step} of the
+above procedure.  The actual details of exponentiation of course
+depend on the actual choice for step~\ref{item:choice}.
+
+\section{Experimenting}
+
+White himself tried many choices, but as of today, there are three
+main contestants to the title of ``best Mandelbulb rotation''.
+Remember that we are defining a rotation whose details depend on the
+point being rotated; hence, all three compose a rotation on the $z$ axis
+and a rotation on the $y$ axis, parameterizing them by the two angles in
+the spherical coordinates of a point---the \emph{azimuth} $\theta$ and
+the \emph{elevation} $\phi$.
+
+\begin{equation}
+\label{eq:negz}
+  R_z(\theta) \cdot R_y(\phi)
+\end{equation}
+\begin{equation}
+\label{eq:posz}
+  R_z(\theta) \cdot R_y(-\phi)
+\end{equation}
+\begin{equation}
+\label{eq:cosine}
+  R_z(\theta) \cdot R_y(\phi-\pi/2)
+\end{equation}
+
+Each of the three has interesting properties, and the first two
+degenerate to $R_z(\theta)$ (and hence to the Mandelbrot set) on the
+$xy$ plane.  \ref{eq:negz} is possibly the most natural solution and
+produces a nice exponent-2 Mandelbulb, but it has the apparent
+disadvantage that $(x,y,z)^1=(x,y,-z)$.  Instead, \ref{eq:posz} has
+$(x,y,z)^1=(x,y,z)$.  Even then, (\ref{eq:cosine}) appears to be
+much more weird, since $(x,y,z)^0=(0,0,1)$.
+
+\ref{eq:posz} was discovered by Paul Nylander, who then proceeded to
+define a fairly complete algebra with commutative (but nonassociative)
+multiplication, multiplicative inverses, and division.  For example,
+since
+\begin{equation}
+  \label{eq:posz-exp}
+  (\rho,\theta,\phi)^n=(\rho^n, n\theta, n\phi)
+\end{equation}
+
+\noindent
+the following definition of multiplication seems natural:
+
+\noindent
+\begin{displaymath}
+  (\rho_1,\theta_1,\phi_1) (\rho_2,\theta_2,\phi_2)=
+  (\rho_1+\rho_2,\theta_1+\theta_2,\phi_1+\phi_2)
+\end{displaymath}
+However, this attempt too seemed stuck against a dead end once the
+proposed algebra started to show more and more annoying differences
+from standard mathematical concepts.  For example, properly
+calculating equation~(\ref{eq:posz-exp}) requires a definition of
+$\phi$ in the range $[-\pi,\pi]$, while spherical coordinates define
+elevation in the range $[-\pi/2,\pi/2]$.  This in turn means that a
+cartesian representation of this algebra is not \emph{power
+  associative}\footnote{In a power associative algebra, $(x,y,z)^{n+m}
+  \ne (x,y,z)^n (x,y,z)^m$}.
+
+Leaving aside for a moment the nice pictures, the fundamental insight
+that White had is this: possibly, the essence of the 2D Mandelbrot does
+not rely on the complex field---there could be something else more
+fundamental to the set's appearance, and this thing could be rotations.
+
+\section{Reconsidering quaternions}
+
+Now, rotations are something that mathematicians have learnt to handle
+very well.  They have two tool of choice to deal with rotations, namely
+matrices and\dots quaternions.
+
+Matrices are an extremely general tool that can represent arbitrary
+linear transformations of an arbitrary vector space, including for
+example those that do not preserve angles.  Any of the three equations
+in the previous section could indeed be converted to a 3x3 matrix $R$,
+and the resulting iteration would have this shape:
+\begin{displaymath}
+  (\rho,\theta,\phi)^n = R(\theta,\phi)^n (\rho^n,0,0)
+\end{displaymath}
+
+\noindent
+Even better, the scaling operation could be included in the transformation
+matrix like this:
+\begin{displaymath}
+  (\rho,\theta,\phi)^n = R(\rho,\theta,\phi)^n (1,0,0)
+\end{displaymath}
+\noindent
+under the following conditions:
+\begin{itemize}
+\item $R$ affects areas by a factor of exactly $\rho$: $\det R = \rho^3$
+\item $R$ is a combination of scaling and rotation: $R^{-1} = R^T / \rho^2$
+\end{itemize}
+
+If these two conditions are imposed, however, the transformation (a
+scaling operation followed by a rotation) is more compactly
+represented by a quaternion $q$.  \emph{Note that the operation that
+  will be performed on the quaternion is \emph{not} $q=q^2+c$, so this
+  will still result in a Mandelbulb} rather than the disappointing
+quaternion Julia sets.
+
+\dots
+
+\section{Conclusion}
+
+Who knows?
+
+\end{document}
