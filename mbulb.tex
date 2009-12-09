@@ -20,9 +20,9 @@
   axes, is possibly the closest existing three-dimensional analogue
   to the 2D Mandelbrot set.
 
-  The classic Mandelbrot set is based on the iteration of $z=z^2+c$ in
+  The classic Mandelbrot set is based on the iteration of $z\leftarrow z^2+c$ in
   the complex plane, thus the most common 3D extension to the
-  ``Mandelbrot'' set is the iteration of $q=q^2+c$ on quaternions.
+  ``Mandelbrot'' set is the iteration of $q\leftarrow q^2+c$ on quaternions.
   The Mandelbulb, instead, is a three-dimensional extension of a
   \emph{geometric} interpretation of complex squaring.
   
@@ -38,7 +38,7 @@ holy grail for fractalists.  The hurdles are many, because the
 bidimensional and three dimensional spaces are inherently very
 different: there is no true analogue of the complex field in three
 dimensions, that there are no three-dimensional conformal mappings,
-the \emph{hairy ball} theorem\dots and besides all this, the
+the \emph{hairy ball} theorem\dots\ and besides all this, the
 expectations for such an object are incredibly high!
 
 There are two main extensions of the Mandelbrot and Julia sets, both
@@ -90,12 +90,12 @@ double the angle from the positive $x$ axis.
 
 \section{From 2D to 3D}
 
-Daniel White's intuition then was to invent a meaningful way of adding
-and squaring points in 3D space, squaring the distance and somehow
-``doubling'' the angle between the positive $x$ axis and the point in
-exam.  The point is then translated by $c$, and the operation is
-repeated until either the sequence diverges or a given number of
-iterations is reached.
+Daniel White's intuition then was to invent a meaningful way of squaring
+and adding points in 3D space.  To do the former, he had to square
+the distance and somehow ``double'' the angle between the positive $x$
+axis and the point in exam.  The point is then translated by $c$, and
+the two steps are repeated until either the sequence diverges or a given
+number of iterations is reached.
 
 Many things in this scheme work out easily.  For example, Euclidean
 distance in 3D space is similarly enough to 2D that the divergence
@@ -122,7 +122,7 @@ the circle.
 Nevertheless, nothing suggested White's construction to be
 fundamentally flawed, and it produced (very) nice pictures, especially
 when the $z^2+c$ was tweaked to include higher exponents.  This is a
-winning combination for the fractalists, which proceeded to experiment
+winning combination for fractalists, who proceeded to experiment
 with many different definitions of rotation.  For all of them, the
 Mandelbulb iteration with exponent $n$ is then obtained by the
 following steps:
@@ -147,7 +147,7 @@ following steps:
 \end{enumerate}
 
 The urge to write this in a form that resembles Julia and Mandelbrot's
-$z=z^n+c$ is hard to resist, so White defined $z^n$ in 3D space as
+$z\leftarrow z^n+c$ is hard to resist, so White defined $z^n$ in 3D space as
 applying steps \ref{item:first-step}--~\ref{item:last-step} of the
 above procedure.  The actual details of exponentiation of course
 depend on the actual rotation chosen for step~\ref{item:choice}.
@@ -196,7 +196,7 @@ since
 the following definition of multiplication seems natural:
 \begin{equation*}
   (\rho_1,\theta_1,\phi_1) (\rho_2,\theta_2,\phi_2)=
-  (\rho_1+\rho_2,\theta_1+\theta_2,\phi_1+\phi_2)
+  (\rho_1 \rho_2,\theta_1+\theta_2,\phi_1+\phi_2)
 \end{equation*}
 
 \noindent
@@ -218,8 +218,8 @@ fundamental to the set's appearance, and this thing could be rotations.
 \section{Reconsidering quaternions}
 
 Now, rotations are something that mathematicians have learnt to handle
-very well.  They have two tool of choice to deal with rotations, namely
-matrices and\dots quaternions.
+very well.  They have two tools of choice to deal with rotations, namely
+matrices and\dots\ quaternions.
 
 Matrices are an extremely general tool that can represent arbitrary
 linear transformations of an arbitrary vector space, including for
@@ -246,9 +246,9 @@ under the following conditions:
 If these two conditions are imposed, however, the transformation (a
 scaling operation followed by a rotation) is more compactly
 represented by a quaternion $q$.  \emph{Note that the operation that
-  will be performed on the quaternion is \textbf{not} $q=q^2+c$, so this
-  will still result in a Mandelbulb} rather than the disappointing
-quaternion Julia sets.
+  will be performed on the quaternion is \textbf{not} $q\leftarrow
+  q^2+c$, so this will still result in a Mandelbulb} rather than the
+disappointing quaternion Julia sets.
 
 \emph{Unit quaternions}, that is quaternions whose norm is 1, represent
 the space of 3D rotations in a simple way.  For the purpose of this paper,
@@ -261,75 +261,84 @@ following quaternion:
 q = \cos \frac\alpha2 + \vec{v} \sin \frac\alpha2
 \end{equation*}
 
-The rotation is clockwise if our line of sight points in the same
-direction as $\vec{v}$.  A rotation $q$ can be applied to a vector
+The rotation is clockwise if the observer's line of sight points in the
+same direction as $\vec{v}$.  A rotation $q$ can be applied to a vector
 $\vec{w}$ by computing two quaternion multiplications, specifically
 $q\vec{v}q^{-1}$.
 
-Rotations can be composed by multiplying two quaternions; ordering
-counts, since multiplication is noncommutative.  However, quaternion
-multiplication is associative, hence $q^n$ is well defined as a rotation
-by $n$ times the angle around the same axis as $q$.
+Rotations can be composed by multiplying two quaternions; ordering is
+significant, since quaternion multiplication is noncommutative.  $q^n$
+instead is well defined as a rotation by $n$ times the angle around the
+same axis as $q$, since multiplication is still associative.
 
-These formulas of course work in 2D too; in this case, in order to remain
-in the $xy$ plane the point must be of the form $x\vec{i}+y\vec{j}$,
-and the rotation quaternion must be of this form:
+These formulas of course work in 2D too; in this case the rotated
+point will be of the form $x\vec{i}+y\vec{j}$ and, in order to stay in
+the $xy$ plane, the rotation must be performed around the $z$ axis:
 \begin{equation*}
 q = \cos \frac\alpha2 + \vec{k} \sin \frac\alpha2
 \end{equation*}
 
 \noindent
-which is more compactly written $e^{\vec{k}\alpha/2}$.
-A somewhat nontraditional expression of the Mandelbrot set then would
-be the following.  Let $\vec{v}=x\vec{i}+y\vec{j}$ be a point on
-the $xy$ plane, and $(\rho,\theta)$ its polar representation.  Then,
-it's possible to write $\vec{v}$ and $\vec{v^2+c}$ from $\rho$ and $\theta$ as follows:
+This is more compactly written $e^{\vec{k}\alpha/2}$.  The polar
+representation of complex numbers also has an equivalent using quaternions
+on the $xy$ plane, albeit the expression is more complicated.
+Let $\vec{v}=x\vec{i}+y\vec{j}$ be a
+point on the $xy$ plane, and $(\rho,\theta)$ its polar representation.
+Then, it's possible to write $\vec{v}$ from $\rho$ and $\theta$ as follows:
 \begin{equation*}
 \vec{v}=\rho e^{\vec{k}\theta/2} \vec{i} e^{-\vec{k}\theta/2}
 \end{equation*}
+
+From here it is a short step to a somewhat nontraditional formulation of
+the Mandelbrot set, based on quaternion rotations.  It was already said
+repeatedly that $\vec{v^2}$ corresponds to squaring $\rho$ and doubling
+$\theta$.  Then, it's possible to write $\vec{v^2+c}$ as follows:
 \begin{equation*}
-\vec{v}^2+c=\rho^2 e^{i\vec{k}\theta} \vec{i} e^{-\vec{k}\theta}+\vec{c}
+\vec{v}^2+\vec{c}=\rho^2 e^{\vec{k}\theta} \vec{i} e^{-\vec{k}\theta}+\vec{c}
 \end{equation*}
 
 But this can complicated expression can be simplified
 noticeably.  For unit quaternions, $q^{-1}=\bar q$:
 inversion and conjugation are the same operation, and $q\vec{i}q^{-1}$ can
 also be written $q\vec{i}\bar q$.  When the modulus is not one, instead,
-$q\vec{i}\bar q = |q|^2 q^{-1}\vec{i}q$.  Then, we can put
-
+$q\vec{i}\bar q = |q|^2 q\vec{i}q^{-1}$.  Therefore we can define
 \begin{equation*}
 q = \rho e^{i\vec{k}\theta} = x + y\vec{k} = -\vec{v}\vec{i}
 \end{equation*}
+
+\noindent
+and write:
 \begin{equation*}
-\vec{v}^2+c=q \vec{i} \bar q+\vec{c}
+\vec{v}^2+\vec{c}=q \vec{i} \bar q+\vec{c}
 \end{equation*}
 
 \noindent
-Changing the sign of $q$ does not affect the effect of the rotation,
-and allows a small simplification.  For the classic Mandelbrot set,
-therefore, the iteration formula will be:
+Changing the sign of $q$ does not modify the effect of the rotation,
+and slightly simplifies the iteration.  The iteration formula will then be
+the following for the classic Mandelbrot set:
 \begin{equation*}
-\vec{v}=q \vec{i} \bar q+\vec{c}\text{, }q=\vec{v}\vec{i}.
+\vec{v}\leftarrow q \vec{i} \bar q+\vec{c}\text{ with }q=\vec{v}\vec{i}.
 \end{equation*}
 
 \noindent
-It is of course possible to generalize to an exponent $n$ other
-than $2$, obtaining
+and, generalizing the exponent $n$ to values other than $2$:
 \begin{equation}
 \label{eq:quat}
-\vec{v}=q^{n/2} \vec{i} \bar q^{n/2}+\vec{c}\text{, }q=\vec{v}\vec{i}.
+\vec{v}\leftarrow q^{n/2} \vec{i} \bar q^{n/2}+\vec{c}\text{ with }q=\vec{v}\vec{i}.
 \end{equation}
 
 \noindent
-and finally by substituting and simplifying
+The final iteration after substitution and simplification is the following:
 \begin{equation*}
-\vec{v}=\vec{v}^{n/2} \vec{i} \vec{\bar v}^{n/2}+\vec{c}
+\vec{v}\leftarrow\vec{v}^{n/2} \vec{i} \vec{\bar v}^{n/2}+\vec{c}
 \end{equation*}
 
-This is the \emph{quaternion formulation of the Mandelbrot set}; when
-drawn in 3D it results in the ``lathed'' Mandelbrot set.  So, for the
-sake of generalizing to 3D, we'll have to take a step back and look at
-equation~\ref{eq:quat} with 3D eyes.
+\noindent
+This is the \emph{quaternion formulation of the Mandelbrot set}.  However,
+when drawn in 3D it results simply in the ``lathed'' 2D Mandelbrot set.
+So, for the sake of generalizing to three dimensions (and rediscovering
+the Mandelbulb in its quaternion form), we'll have to take a step back
+and look at equation~\ref{eq:quat} with 3D eyes.
 
 \section{Rethinking the Mandelbulb}
 
