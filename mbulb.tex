@@ -1,11 +1,16 @@
 \documentclass{article}
 \usepackage{amsmath}
+\usepackage{palatino}
+\usepackage{setspace}
+
 \title{To quaternions and back}
 \date{\today}
 \author{Paolo Bonzini}
 
 \begin{document}
 \maketitle
+
+\setstretch{1.05}
 
 \begin{abstract}
   Daniel White's \emph{Mandelbulb}, with its fractal features on all
@@ -142,7 +147,7 @@ The urge to write this in a form that resembles Julia and Mandelbrot's
 $z=z^n+c$ is hard to resist, so White defined $z^n$ in 3D space as
 applying steps \ref{item:first-step}--~\ref{item:last-step} of the
 above procedure.  The actual details of exponentiation of course
-depend on the actual choice for step~\ref{item:choice}.
+depend on the actual rotation chosen for step~\ref{item:choice}.
 
 \section{Experimenting}
 
@@ -169,13 +174,13 @@ the \emph{elevation} $\phi$.
 
 Each of the three has interesting properties, and the first two
 degenerate to $R_z(\theta)$ (and hence to the Mandelbrot set) on the
-$xy$ plane.  \ref{eq:negz} is possibly the most natural solution and
+$xy$ plane.  (\ref{eq:negz}) is possibly the most natural solution and
 produces a nice exponent-2 Mandelbulb, but it has the apparent
-disadvantage that $(x,y,z)^1=(x,y,-z)$.  Instead, \ref{eq:posz} has
+disadvantage that $(x,y,z)^1=(x,y,-z)$.  Instead, (\ref{eq:posz}) has
 $(x,y,z)^1=(x,y,z)$.  Even then, (\ref{eq:cosine}) appears to be
 much more weird, since $(x,y,z)^0=(0,0,1)$.
 
-\ref{eq:posz} was discovered by Paul Nylander, who then proceeded to
+Equation~\ref{eq:posz} was discovered by Paul Nylander, who then proceeded to
 define a fairly complete algebra with commutative (but nonassociative)
 multiplication, multiplicative inverses, and division.  For example,
 since
@@ -195,7 +200,7 @@ the following definition of multiplication seems natural:
 However, this attempt too seemed stuck against a dead end once the
 proposed algebra started to show more and more annoying differences
 from standard mathematical concepts.  For example, properly
-calculating equation~(\ref{eq:posz-exp}) requires a definition of
+calculating equation~\ref{eq:posz-exp} requires a definition of
 $\phi$ in the range $[-\pi,\pi]$, while spherical coordinates define
 elevation in the range $[-\pi/2,\pi/2]$.  This in turn means that a
 cartesian representation of this algebra is not \emph{power
@@ -244,8 +249,8 @@ quaternion Julia sets.
 
 \dots
 
-\section{Conclusion}
-
-Who knows?
+%% \section{Conclusion}
+%% 
+%% Who knows?
 
 \end{document}

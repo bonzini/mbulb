@@ -7,10 +7,10 @@ OUTPUTS = $(DVI) $(PDF)
 all: $(OUTPUTS)
 
 $(DVI): %.dvi: %.tex $(INPUTS)
-	latex $*; latex $*
+	latex $* && latex $*
 
 $(PDF): %.pdf: %.tex $(INPUTS)
-	pdflatex $*; pdflatex $*
+	pdflatex $* && pdflatex $*
 
 clean:
 	rm -f *.aux *.log *~ $(OUTPUTS)
