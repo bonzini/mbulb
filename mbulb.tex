@@ -37,13 +37,12 @@
 
 \section{Introduction}
 
-An extension of the Mandelbrot set to three dimension is a kind of
-holy grail for fractalists.  The hurdles are many, because the
-bidimensional and three dimensional spaces are inherently very
-different: there is no true analogue of the complex field in three
-dimensions, that there are no three-dimensional conformal mappings,
-the \emph{hairy ball} theorem\dots\ and besides all this, the
-expectations for such an object are incredibly high!
+An extension of the Mandelbrot set to three dimension is a kind of holy
+grail for fractalists.  The hurdles are many and stem from the inherent
+difference between the two- and three-dimensional spaces: no true analogue
+of the complex field in three dimensions, no three-dimensional conformal
+mappings, the \emph{hairy ball} theorem\dots\ and besides all this,
+the expectations for such an object are incredibly high!
 
 There are two main extensions of the Mandelbrot and Julia sets, both
 of them to four dimensions.  One is to use quaternions instead of
@@ -87,12 +86,13 @@ of multiplication is derived as follows:
   
 \noindent
 The result of the multiplication $z_1 z_2$ is a point that is obtained
-from $z_1$ by \emph{stretching it by a factor $\rho_1$}, and
-then \emph{rotating it by an angle $\theta_1$}; and the result of
+from $z_1$ by \emph{stretching it by a factor $\rho_2$}, and
+then \emph{rotating it by an angle $\theta_2$}; and the result of
 squaring is obtained by squaring the distance from the origin and
-double the angle from the positive $x$ axis.
+doubling the angle from the positive $x$ axis.
 
 \section{From 2D to 3D}
+\label{sec:2d-3d}
 
 Daniel White's intuition then was to invent a meaningful way of squaring
 and adding points in 3D space.  To do the former, he had to square
@@ -248,11 +248,13 @@ under the following conditions:
 \end{itemize}
 
 If these two conditions are imposed, however, the transformation (a
-scaling operation followed by a rotation) is more compactly
-represented by a quaternion $q$.  \emph{Note that the operation that
-  will be performed on the quaternion is \textbf{not} $q\leftarrow
-  q^2+c$, so this will still result in a Mandelbulb} rather than the
-disappointing quaternion Julia sets.
+scaling operation followed by a rotation) is more compactly represented
+by a quaternion $q$.  \emph{Note that the operation that
+  will be performed on the quaternion is \textbf{not} $q\leftarrow q^2+c$,
+  so this will still result in a Mandelbulb} rather than the
+disappointing quaternion Julia sets.  Only, the 3-tuples of
+Section~\ref{sec:2d-3d} will be replaced a well-known mathematical
+object, the quaternion.
 
 \emph{Unit quaternions}, that is quaternions whose norm is 1, represent
 the space of 3D rotations in a simple way.  For the purpose of this paper,
@@ -295,17 +297,17 @@ Then, it's possible to write $\vec{v}$ from $\rho$ and $\theta$ as follows:
 
 From here it is a short step to a somewhat nontraditional formulation of
 the Mandelbrot set, based on quaternion rotations.  It was already said
-repeatedly that $\vec{v^2}$ corresponds to squaring $\rho$ and doubling
-$\theta$.  Then, it's possible to write $\vec{v^2+c}$ as follows:
+repeatedly that $\vec{v}^2$ corresponds to squaring $\rho$ and doubling
+$\theta$.  Then, it's possible to write $\vec{v}^2+c$ as follows:
 \begin{equation*}
 \vec{v}^2+\vec{c}=\rho^2 e^{\vec{k}\theta} \vec{i} e^{-\vec{k}\theta}+\vec{c}
 \end{equation*}
 
-But this can complicated expression can be simplified
-noticeably.  For unit quaternions, $q^{-1}=\bar q$:
-inversion and conjugation are the same operation, and $q\vec{i}q^{-1}$ can
-also be written $q\vec{i}\bar q$.  When the modulus is not one, instead,
-$q\vec{i}\bar q = |q|^2 q\vec{i}q^{-1}$.  Therefore we can define
+But this complicated expression can be simplified noticeably.  For unit
+quaternions, $q^{-1}=\bar q$: inversion and conjugation are the same
+operation, and $q\vec{i}q^{-1}$ can also be written $q\vec{i}\bar
+q$.  When the modulus is not one, instead, $q\vec{i}\bar q = |q|^2
+q\vec{i}q^{-1}$.  Therefore we can define
 \begin{equation*}
 q = \rho e^{i\vec{k}\theta} = x + y\vec{k} = -\vec{v}\vec{i}
 \end{equation*}
@@ -334,17 +336,24 @@ and, generalizing the exponent $n$ to values other than $2$:
 \end{equation}
 
 \noindent
-The final iteration after substitution and simplification is the following:
-\begin{equation*}
-\vec{v}\leftarrow\vec{v}^{n/2} \vec{i} \vec{\bar v}^{n/2}+\vec{c}
-\end{equation*}
+For $n=2$ it is possible to substitute and simplify $q$, giving
+the following\footnote{An interesting point in this formula is that
+  $\vec{v}\vec{i}\vec{\bar v}$ is also a quaternion rotation, more
+  precisely a 180 degree rotation around axis $\vec{v}$.  In 2D this
+  is a reflection, so the result will still lie on the $xy$ plane
+  even though the axis is not $\vec{k}$.}:
+\begin{equation}
+\label{eq:coolness}
+\vec{v}\leftarrow\vec{v} \vec{i} \vec{\bar v}+\vec{c}
+\end{equation}
 
 \noindent
-This is the \emph{quaternion formulation of the Mandelbrot set}.  However,
-when drawn in 3D it results simply in the ``lathed'' 2D Mandelbrot set.
-So, for the sake of generalizing to three dimensions (and rediscovering
-the Mandelbulb in its quaternion form), we'll have to take a step back
-and look at equation~\ref{eq:quat} with 3D eyes.
+This elegant iteration is the \emph{quaternion formulation of the
+  Mandelbrot set}.  However, equation~\ref{eq:coolness} does not generalize
+to $n>2$ and, when drawn in 3D it results simply in the ``lathed'' 2D
+Mandelbrot set.  So, for the sake of generalizing to three dimensions
+(and rediscovering the Mandelbulb in its quaternion form), we'll have
+to take a step back and look at equation~\ref{eq:quat} with 3D eyes.
 
 \section{Rethinking the Mandelbulb}
 
