@@ -99,7 +99,9 @@ and adding points in 3D space.  To do the former, he had to square
 the distance and somehow ``double'' the angle between the positive $x$
 axis and the point in exam.  The point is then translated by $c$, and
 the two steps are repeated until either the sequence diverges or a given
-number of iterations is reached.
+number of iterations is reached.  This idea had actually been proposed
+before by Rudy Rucker, but his formulas had a small error that caused
+them to produce less interesting results.
 
 Many things in this scheme work out easily.  For example, Euclidean
 distance in 3D space is similarly enough to 2D that the divergence
@@ -126,11 +128,11 @@ the circle.
 
 Nevertheless, nothing suggested White's construction to be
 fundamentally flawed, and it produced (very) nice pictures, especially
-when the $z^2+c$ was tweaked to include higher exponents.  This is a
-winning combination for fractalists, who proceeded to experiment
-with many different definitions of rotation.  For all of them, the
-Mandelbulb iteration with exponent $n$ is then obtained by the
-following steps:
+when the $z^2+c$ was tweaked to include higher exponents\footnote{This
+  was first tried by Paul Nylander.}.  This is a winning combination
+for fractalists, who proceeded to experiment with many different
+definitions of rotation.  For all of them, the Mandelbulb iteration with
+exponent $n$ is then obtained by the following steps:
 \begin{enumerate}
 \item \label{item:first-step}
   compute the spherical coordinates $(\rho,\theta,\phi)$ of the
@@ -401,7 +403,10 @@ example equation~(\ref{eq:posz}).  In quaternion form, we
 have\footnote{Note that these functions correspond to rotation of
   twice the angle given by equation~(\ref{eq:posz}), since the
   rotation is done from $\vec{i}$ rather than $\vec{v}$.  This avoids
-  the introduction of fractional terms $\theta/2$ and $\phi/2$.}:
+  the introduction of fractional terms $\theta/2$ and $\phi/2$.
+  For $x=y=0$, the function is not continuous, and any value
+  of $\theta$ can be used.  The simplest possibilities are
+  $Q(\vec{v}) = -\vec{i}z$ or $Q(\vec{v}) = \vec{j}z$.}:
 \begin{equation}
   \label{eq:posz-q}
   \begin{array}{l}
@@ -438,9 +443,8 @@ coordinates.
 
 Instead, ``triplex exponentiation'' does have a meaning since the
 cartesian formulas for it include the conversion to rotation
-quaternions as well as applying the rotation to $\vec{i}$\footnote{However,
-  care should be taken since exponetiation is not continuous around
-  $(0,0,z)$.}.  This is advantageous, because the exponentiation
+quaternions as well as applying the rotation to $\vec{i}$.  This is
+advantageous, because the exponentiation
 formulas are faster than using quaternion multiplication.
 
 Finally, as another example of defining $Q(\vec{v})$,
