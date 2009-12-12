@@ -23,8 +23,8 @@
   The classic Mandelbrot set is based on the iteration of $z\leftarrow
   z^2+c$ in the complex plane, thus the most common 3D extension
   to the ``Mandelbrot'' set is the iteration of $q\leftarrow q^2+c$
-  on quaternions.  The Mandelbulb, instead, is a three-dimensional
-  extension of a \emph{geometric} interpretation of complex squaring.
+  on quaternions.  The Mandelbulb, instead, extends to three dimension
+  the \emph{geometric} interpretation of complex squaring.
 
   In this paper, I propose an alternative explanation of the Mandelbulb
   formulas using standard quaternion arithmetic, with the hope of adding
@@ -115,7 +115,8 @@ rise to very different fractals.
 
 On top of this, there is some uneasiness due to the fact that 3D
 complex numbers were sought by mathematicians for decades and in the
-end they settled for four-component quaternions, despite some strange
+end they settled for four-component quaternions
+$w+\vec{i}x+\vec{j}y+\vec{k}z$, despite these possess strange
 properties such as \emph{noncommutative multiplication}.  The infinite
 possible ways to define the 3D rotation give the feeling of banging
 one's head against dead ends.  Searching for the properties of
@@ -187,7 +188,7 @@ disadvantage that $(x,y,z)^1=(x,y,-z)$.  Instead, (\ref{eq:posz}) has
 $(x,y,z)^1=(x,y,z)$.  Even then, (\ref{eq:cosine}) appears to be
 much more weird, since $(x,y,z)^0=(0,0,1)$.
 
-Equation~\ref{eq:posz} was discovered by Paul Nylander, who then proceeded to
+Equation~(\ref{eq:posz}) was discovered by Paul Nylander, who then proceeded to
 define a fairly complete algebra with commutative (but nonassociative)
 multiplication, multiplicative inverses, and division.  For example,
 since
@@ -207,7 +208,7 @@ the following definition of multiplication seems natural:
 However, this attempt too seemed stuck against a dead end once the
 proposed algebra started to show more and more annoying differences
 from standard mathematical concepts.  For example, properly
-calculating equation~\ref{eq:posz-exp} requires a definition of
+calculating equation~(\ref{eq:posz-exp}) requires a definition of
 $\phi$ in the range $[-\pi,\pi]$, while spherical coordinates define
 elevation in the range $[-\pi/2,\pi/2]$.  This in turn means that a
 cartesian representation of this algebra is not \emph{power
@@ -247,20 +248,19 @@ under the following conditions:
 \item $R$ is a combination of scaling and rotation: $R^{-1} = R^T / \rho^2$
 \end{itemize}
 
-If these two conditions are imposed, however, the transformation (a
-scaling operation followed by a rotation) is more compactly represented
-by a quaternion $q$.  \emph{Note that the operation that
-  will be performed on the quaternion is \textbf{not} $q\leftarrow q^2+c$,
-  so this will still result in a Mandelbulb} rather than the
-disappointing quaternion Julia sets.  Only, the 3-tuples of
-Section~\ref{sec:2d-3d} will be replaced a well-known mathematical
-object, the quaternion.
+If these two conditions are imposed, however, the transformation is
+more compactly represented by a quaternion $q$.  \emph{Note that the
+  operation that will be performed on the quaternion is \textbf{not}
+  $q\leftarrow q^2+c$, so this will still result in a Mandelbulb}
+rather than the disappointing quaternion Julia sets.  Only, the
+3-tuples of Section~\ref{sec:2d-3d} will be replaced a well-known
+mathematical object, the quaternion.
 
 \emph{Unit quaternions}, that is quaternions whose norm is 1, represent
 the space of 3D rotations in a simple way.  For the purpose of this paper,
 it will suffice to show how to describe a rotation by a quaternion,
 without explaining the theory behind this.  $\vec{v}$ will indicate a
-quaternion with a zero scalar part, that is $x\vec{i}+y\vec{j}+z\vec{k}$;
+quaternion with a zero scalar part, that is $\vec{ix}+\vec{j}y+\vec{k}z$;
 the rotation by an angle $\alpha$ around axis is then represented by the
 following quaternion:
 \begin{equation*}
@@ -278,7 +278,7 @@ instead is well defined as a rotation by $n$ times the angle around the
 same axis as $q$, since multiplication is still associative.
 
 These formulas of course work in 2D too; in this case the rotated
-point will be of the form $x\vec{i}+y\vec{j}$ and, in order to stay in
+point will be of the form $\vec{i}x+\vec{j}y$ and, in order to stay in
 the $xy$ plane, the rotation must be performed around the $z$ axis:
 \begin{equation*}
 q = \cos \frac\alpha2 + \vec{k} \sin \frac\alpha2
@@ -286,11 +286,11 @@ q = \cos \frac\alpha2 + \vec{k} \sin \frac\alpha2
 
 \noindent
 This is more compactly written $e^{\vec{k}\alpha/2}$.  The polar
-representation of complex numbers also has an equivalent using quaternions
-on the $xy$ plane, albeit the expression is more complicated.
-Let $\vec{v}=x\vec{i}+y\vec{j}$ be a
-point on the $xy$ plane, and $(\rho,\theta)$ its polar representation.
-Then, it's possible to write $\vec{v}$ from $\rho$ and $\theta$ as follows:
+representation of complex numbers also has an equivalent using
+quaternions on the $xy$ plane, albeit the expression is more
+complicated.  Let $\vec{v}=\vec{i}x+\vec{j}y$ be a point on the $xy$
+plane, and $(\rho,\theta)$ its polar representation.  Then, it's
+possible to write $\vec{v}$ from $\rho$ and $\theta$ as follows:
 \begin{equation*}
 \vec{v}=\rho e^{\vec{k}\theta/2} \vec{i} e^{-\vec{k}\theta/2}
 \end{equation*}
@@ -309,7 +309,7 @@ operation, and $q\vec{i}q^{-1}$ can also be written $q\vec{i}\bar
 q$.  When the modulus is not one, instead, $q\vec{i}\bar q = |q|^2
 q\vec{i}q^{-1}$.  Therefore we can define
 \begin{equation*}
-q = \rho e^{i\vec{k}\theta} = x + y\vec{k} = -\vec{v}\vec{i}
+q = \rho e^{\vec{k}\theta} = x + y\vec{k} = -\vec{v}\vec{i}
 \end{equation*}
 
 \noindent
@@ -349,16 +349,133 @@ the following\footnote{An interesting point in this formula is that
 
 \noindent
 This elegant iteration is the \emph{quaternion formulation of the
-  Mandelbrot set}.  However, equation~\ref{eq:coolness} does not generalize
-to $n>2$ and, when drawn in 3D it results simply in the ``lathed'' 2D
-Mandelbrot set.  So, for the sake of generalizing to three dimensions
-(and rediscovering the Mandelbulb in its quaternion form), we'll have
-to take a step back and look at equation~\ref{eq:quat} with 3D eyes.
+  Mandelbrot set}.  However, equation~(\ref{eq:coolness}) does not
+generalize to odd $n$ and, when drawn in 3D, it results simply in the
+``lathed'' 2D Mandelbrot set.  So, for the sake of generalizing to
+three dimensions (and rediscovering the Mandelbulb in its quaternion
+form), we'll have to take a step back and look at
+equation~(\ref{eq:quat}) with 3D in mind.
 
 \section{Rethinking the Mandelbulb}
 
-%% \section{Conclusion}
-%% 
-%% Who knows?
+Since there is no single candidate to the role of 3D Mandelbrot, it
+makes sense to define a family of iterations that can be used to produce
+these fractals.  Some of them will be more interestings and other more
+boring, but all of them will share the same properties:
+\begin{enumerate}
+\item When generating an exponent $n$ fractal, the iteration will
+  raise the modulo of the quaternion $v$ to power $n$ before summing
+  $c$;
+
+\item\label{item:mandel-xy} They should degenerate to the Mandelbrot
+  set on a plane---for simplicity, the choice will be the $xy$ plane.
+\end{enumerate}
+
+Each different fractal will be described by a function $Q(\vec{v})$
+associating a quaternion to a position in 3D space $v$.  To satisfy
+the first condition, the function should satisfy $|Q(\vec{v})| =
+|\vec{v}|$; the second condition can be imposed by checking that
+\begin{equation*}
+\label{eq:its-mandel}
+ Q(\vec{i}x+\vec{j}y) = x+\vec{k}y
+\end{equation*}
+\noindent
+whenever the $\vec{k}$ component of $\vec{v}$ is zero (alternatively,
+if $\vec{v}$'s spherical coordinates are used, whenever $\phi = 0$).
+
+Note that this would exclude equation~(\ref{eq:cosine}), which indeed
+has a very distorted appearance for $n=2$.  It would also exclude
+equation~(\ref{eq:coolness}), since it is equivalent to Mandelbrot's
+only for even $n$.  Still, under this definition there are infinite
+possible definitions of $Q(\vec{v})$ that make sense and many produce
+interesting drawings.  The main advantage is that the function
+$Q(\vec{v})$ is the same for all exponents: its definition
+automatically includes the generalization of squaring to
+exponentiation.
+
+In addition, the quaternion formulation avoids several problems with
+White and Nylander's 3-tuples.  As I'll show now, these problems are
+intrinsic in their definition, and there is justification as to why
+they are not present when quaternions are used.  Let's consider for
+example equation~(\ref{eq:posz}).  In quaternion form, we
+have\footnote{Note that these functions correspond to rotation of
+  twice the angle given by equation~(\ref{eq:posz}), since the
+  rotation is done from $\vec{i}$ rather than $\vec{v}$.  This avoids
+  the introduction of fractional terms $\theta/2$ and $\phi/2$.}:
+\begin{equation}
+  \label{eq:posz-q}
+  \begin{array}{l}
+  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi - \vec{j} \sin \phi)\\
+  \quad = \rho \cos \theta \cos \phi + \vec{i} \rho \sin \theta \sin \phi - \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi\\
+  \quad = x + \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} - \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
+\end{array}
+\end{equation}
+
+\noindent
+From this formula it is trivial to verify the two condition expressed
+above.  It is also possible, if needed, to easily convert the
+quaternion $q$ back to $(\rho, \theta, \phi)$:
+\begin{equation*}
+  \rho = |q|, \theta = \arctan {-\frac{q_x}{q_y}}, \phi = \arctan \frac{q_x}{q_z}
+\end{equation*}
+
+One important property of the values of equation~(\ref{eq:posz-q}) is
+that $Q(\vec{v})$ takes a different value for each $\theta$ and $\phi$
+in the range $(-\pi, \pi)$.  In other words, unlike when using
+spherical coordinates, rotation of the elevation is expressed using
+its full $2\pi$ range; you may recall this to be a problem in the
+3-tuple representation.
+
+In fact, this is the reason for their lack of power
+associativity; in Nylander's multiplication formula two objects with
+two different meanings (a rotation and a vector) appear in a
+commutative way, but since rotations are ``twice as many'' as vectors,
+the rotation cannot be described exactly.  While it happens to suffice
+in the case of squaring, this does not extend to higher powers.
+Therefore, unlike exponentiation, \emph{``triplex multiplication''
+  does not have a geometrical meaning} when expressed in cartesian
+coordinates.
+
+Instead, ``triplex exponentiation'' does have a meaning since the
+cartesian formulas for it include the conversion to rotation
+quaternions as well as applying the rotation to $\vec{i}$\footnote{However,
+  care should be taken since exponetiation is not continuous around
+  $(0,0,z)$.}.  This is advantageous, because the exponentiation
+formulas are faster than using quaternion multiplication.
+
+Finally, as another example of defining $Q(\vec{v})$,
+equation~(\ref{eq:negz}) can be written as follows:
+\begin{equation*}
+  \begin{array}{l}
+  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi + \vec{j} \sin \phi)\\
+  \quad = \rho \cos \theta \cos \phi - \vec{i} \rho \sin \theta \sin \phi + \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi\\
+  \quad = x - \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} + \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
+  \end{array}
+\end{equation*}
+
+\section{Conclusion}
+
+In this paper I proposed to describe the family of Mandelbulb fractals
+using quaternions, so that each possible definition of exponentiation
+can be written as a functions from a vector to a quaternion.  The
+resulting function is independent of the chosen $n$.  This formulation
+makes it easy to distinguish members which embed the Mandelbrot
+fractal, and eliminates the need to define new non-standard algebras.
+
+An alternative method using transformation matrices was also presented
+briefly.  This method is more useful for extensions beyond the third
+dimension.
+
+However, this paper barely scratched the surface in terms of analyzing
+the properties of the fractals itself.  There are many questions that
+can be analyzed.  For example, what are the boundaries of the set?
+Or, why do some fractals have a flat appearance for $n = 2$?
+
+Since there may be no true 3D equivalent of the Mandelbrot fractal,
+exploring the space of $Q(\vec{v})$ functions may at least help
+steering the search for new fractal creations of this family.  It is
+my hope that this paper will provide a tool to analyze their
+characteristics rigorously and, maybe, will contribute to the
+discovery of more beautiful mathematical objects.
 
 \end{document}
