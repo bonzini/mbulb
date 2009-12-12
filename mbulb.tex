@@ -8,7 +8,8 @@
 \author{Paolo Bonzini}
 
 \let\vec\mathbf
-\def\q#1{\vec#1}
+\newcommand{\mathnewline}[1][\quad]{\\\phantom{#1}}
+\newcommand{\mathnewlineeq}[1][\quad]{\\\phantom{#1 = }}
 
 \begin{document}
 \maketitle
@@ -410,9 +411,9 @@ have\footnote{Note that these functions correspond to rotation of
 \begin{equation}
   \label{eq:posz-q}
   \begin{array}{l}
-  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi - \vec{j} \sin \phi)\\
-  \quad = \rho \cos \theta \cos \phi + \vec{i} \rho \sin \theta \sin \phi - \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi\\
-  \quad = x + \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} - \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
+  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi - \vec{j} \sin \phi)
+  \mathnewline[Q(\vec{v})] = \rho \cos \theta \cos \phi + \vec{i} \rho \sin \theta \sin \phi - \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi
+  \mathnewline[Q(\vec{v})] = x + \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} - \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
 \end{array}
 \end{equation}
 
@@ -451,9 +452,9 @@ Finally, as another example of defining $Q(\vec{v})$,
 equation~(\ref{eq:negz}) can be written as follows:
 \begin{equation*}
   \begin{array}{l}
-  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi + \vec{j} \sin \phi)\\
-  \quad = \rho \cos \theta \cos \phi - \vec{i} \rho \sin \theta \sin \phi + \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi\\
-  \quad = x - \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} + \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
+  Q(\vec{v}) = \rho (\cos \theta + \vec{k} \sin \theta) (\cos \phi + \vec{j} \sin \phi)
+  \mathnewline[Q(\vec{v})] = \rho \cos \theta \cos \phi - \vec{i} \rho \sin \theta \sin \phi + \vec{j} \rho \cos \theta \sin \phi + \vec{k} \rho \sin \theta \cos \phi
+  \mathnewline[Q(\vec{v})] = x - \vec{i}\frac{y z}{\sqrt{x^2 + y^2}} + \vec{j}\frac{x z}{\sqrt{x^2 + y^2}} + \vec{k} y
   \end{array}
 \end{equation*}
 
@@ -482,4 +483,58 @@ my hope that this paper will provide a tool to analyze their
 characteristics rigorously and, maybe, will contribute to the
 discovery of more beautiful mathematical objects.
 
+\newpage
+\appendix
+\section{Expansion of quaternion formulas}
+
+\begin{description}
+\item[Rotation of $\vec{i}$ by $q$]
+\begin{equation*}
+q\vec{i}\bar q =
+  \vec{i}(q_w^2+q_x^2-q_y^2-q_z^2) + \vec{j} (2q_x q_y + 2q_w q_z)
+  + \vec{k} (2 q_x q_z - 2 q_w q_y)
+\end{equation*}
+
+\noindent This is the main step in the computation of the Mandelbulb
+for $n=2$.
+
+\bigskip
+\item[Quaternion squaring and multiplication]
+\begin{equation*}
+\begin{array}{l}
+\hbox to 0pt{$q^2\hss$}\phantom{p q} =
+  (q_w^2-q_x^2-q_y^2-q_z^2) + 2 \vec{i} q_w q_x + 2 \vec{j} q_w q_y
+  + 2 \vec{k} q_w q_z\\
+p q =       (p_w q_w - p_x q_x - p_y q_y - p_z q_z)
+  + \vec{i} (p_w q_x + p_x q_w + p_y q_z - p_z q_y) \mathnewlineeq[p q]
+  + \vec{j} (p_w q_y - p_x q_z + p_y q_w + p_z q_x)
+  + \vec{k} (p_w q_z + p_x q_y - p_y q_x + p_z q_w)
+\end{array}
+\end{equation*}
+
+\noindent
+Squaring and multiplication allow to compute an arbitrary power using
+the \emph{binary exponentiation} algorithm.  In this case, multiplication
+will be commutative.
+
+\bigskip
+\item[$Q(v)^2$ for the definition of equation~(\ref{eq:posz-q})]
+\begin{equation*}
+Q(v)^2 =
+  (x^2-y^2-z^2) + \frac{2xz}{\sqrt{x^2+y^2}} (-\vec{i} y + \vec{j} x)
+  + 2\vec{k}xy
+\end{equation*}
+\noindent This is slightly faster than computing $Q(v)$ and then squaring,
+due to the simplifications in the $q_w$ term.  It can be used to compute
+the Mandelbulb for $n=4$.
+
+\bigskip
+\item[Real part of $Q(v)^4$ for the definition of equation~(\ref{eq:posz-q})]
+\begin{equation*}
+\mathrm{Re}~Q(v)^4 = (x^2-y^2-z^2)^2 - 4x^2 y^2 -4 x^2 z^2
+\end{equation*}
+
+For $n=8$ one more squaring is necessary.  However, the real term can
+be simplified considerably using the above expression.
+\end{description}
 \end{document}
