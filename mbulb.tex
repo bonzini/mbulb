@@ -358,7 +358,10 @@ the following\footnote{An interesting point in this formula is that
   $\vec{v}\vec{i}\vec{\bar v}$ is also a quaternion rotation, more
   precisely a 180 degree rotation around axis $\vec{v}$.  In 2D this
   is a reflection, so the result will still lie on the $xy$ plane
-  even though the axis is not $\vec{k}$.}:
+  even though the axis is not $\vec{k}$.  Multiplying on the right
+  by $\vec{-i}$, alternatively, corresponds to adding a 270 degree
+  rotation around the $x$ axis, which is irrelevant because the
+  transformed point always lies on that axis.}:
 \begin{equation}
 \label{eq:coolness}
 \vec{v}\leftarrow\vec{v} \vec{i} \vec{\bar v}+\vec{c}
@@ -366,12 +369,11 @@ the following\footnote{An interesting point in this formula is that
 
 \noindent
 This elegant iteration is the \emph{quaternion formulation of the
-  Mandelbrot set}.  However, equation~(\ref{eq:coolness}) does not
-generalize to odd $n$ and, when drawn in 3D, it results simply in the
-``lathed'' 2D Mandelbrot set.  So, for the sake of generalizing to
-three dimensions (and rediscovering the Mandelbulb in its quaternion
-form), we'll have to take a step back and look at
-equation~(\ref{eq:quat}) with 3D in mind.
+  Mandelbrot set}.  However, equation~(\ref{eq:coolness}), when
+drawn in 3D, it results simply in the ``lathed'' 2D Mandelbrot set.  So,
+for the sake of generalizing to three dimensions (and rediscovering the
+Mandelbulb in its quaternion form), we'll have to take a step back and
+look at equation~(\ref{eq:quat}) with 3D in mind.
 
 \section{Rethinking the Mandelbulb}
 
@@ -401,14 +403,13 @@ whenever the $\vec{k}$ component of $\vec{v}$ is zero (alternatively,
 if $\vec{v}$'s spherical coordinates are used, whenever $\phi = 0$).
 
 Note that this would exclude equation~(\ref{eq:cosine}), which indeed
-has a very distorted appearance for $n=2$.  It would also exclude
-equation~(\ref{eq:coolness}), since it is equivalent to Mandelbrot's
-only for even $n$.  Still, under this definition there are infinite
-possible definitions of $Q(\vec{v})$ that make sense and many produce
-interesting drawings.  The main advantage is that the function
-$Q(\vec{v})$ is the same for all exponents: its definition
-automatically includes the generalization of squaring to
-exponentiation.
+has a very distorted appearance for $n=2$.  Still, under this definition
+there are infinite possible definitions of $Q(\vec{v})$ that make sense
+and many produce interesting drawings.  The main advantage is that the
+function $Q(\vec{v})$ is the same for all exponents: its definition
+automatically includes the generalization of squaring to exponentiation.
+It is also includes possibilities such as adding phase shifts to $\phi$
+or multiplying by arbitrary factors.
 
 In addition, the quaternion formulation avoids several problems with
 White and Nylander's 3-tuples.  As I'll show now, these problems are
