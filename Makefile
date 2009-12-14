@@ -1,4 +1,4 @@
-INPUTS = mbulb.tex mbulb.jpg
+INPUTS = mbulb.tex mbulb.jpg mbulb2.jpg
 MAIN = $(firstword $(INPUTS))
 DVI = #$(patsubst %.tex,%.dvi,$(MAIN))
 PDF = $(patsubst %.tex,%.pdf,$(MAIN))
