@@ -278,8 +278,8 @@ the space of 3D rotations in a simple way.  For the purpose of this paper,
 it will suffice to show how to describe a rotation by a quaternion,
 without explaining the theory behind this.  $\vec{v}$ will indicate a
 quaternion with a zero scalar part, that is $\vec{ix}+\vec{j}y+\vec{k}z$;
-the rotation by an angle $\alpha$ around axis is then represented by the
-following quaternion:
+the rotation by an angle $\alpha$ around axis $\vec{v}$ is then
+represented by the following quaternion:
 \begin{equation*}
 q = \cos \frac\alpha2 + \vec{v} \sin \frac\alpha2
 \end{equation*}
@@ -287,7 +287,7 @@ q = \cos \frac\alpha2 + \vec{v} \sin \frac\alpha2
 The rotation is clockwise if the observer's line of sight points in the
 same direction as $\vec{v}$.  A rotation $q$ can be applied to a vector
 $\vec{w}$ by computing two quaternion multiplications, specifically
-$q\vec{v}q^{-1}$.
+$q\vec{w}q^{-1}$.
 
 Rotations can be composed by multiplying two quaternions; ordering is
 significant, since quaternion multiplication is noncommutative.  $q^n$
