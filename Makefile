@@ -1,6 +1,6 @@
-INPUTS = mbulb.tex
+INPUTS = mbulb.tex mbulb.jpg
 MAIN = $(firstword $(INPUTS))
-DVI = $(patsubst %.tex,%.dvi,$(MAIN))
+DVI = #$(patsubst %.tex,%.dvi,$(MAIN))
 PDF = $(patsubst %.tex,%.pdf,$(MAIN))
 OUTPUTS = $(DVI) $(PDF)
 
