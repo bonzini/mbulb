@@ -1,0 +1,1 @@
+jpegtopnm $1 | pamscale --reduce ${2-2} | pnmgamma 1.85 | pnmtojpeg
