@@ -397,9 +397,10 @@ degenerating to a same-order Mandelbrot set on a plane---for
 simplicity, the choice will be the $xy$ plane.
 
 Each different fractal will be described by a function $Q(\vec{v})$
-associating a quaternion to a position in 3D space $v$.  To satisfy
-the first condition, the function should satisfy $|Q(\vec{v})| =
-|\vec{v}|$; the second condition can be imposed by checking that
+associating a quaternion to a position in 3D space $\vec{v}$.  To
+satisfy the first condition, the function should satisfy
+$|Q(\vec{v})| = |\vec{v}|$; the second condition can be imposed
+by checking that
 \begin{equation*}
 \label{eq:its-mandel}
  Q(\vec{i}x+\vec{j}y) = x+\vec{k}y
@@ -445,7 +446,7 @@ needed, to easily convert the quaternion $q$ back to $(\rho, \theta,
   \phi = \arctan {\frac{q_x}{q_z}} = \arctan {-\frac{q_y}{q_w}}
 \end{equation*}
 
-Unfortunately, the definition of $Q(v)$ proposed so far will match the
+Unfortunately, the definition of $Q(\vec{v})$ proposed so far will match the
 corresponding Mandelbulb only for $n=2$.  For higher orders, raising
 equations~(\ref{eq:posz-q}) and~(\ref{eq:negz-q}) to $n/2$ will
 alternate rotations around the $z$ and $y$ axes, instead of making a
@@ -672,7 +673,7 @@ the \emph{binary exponentiation} algorithm.
 p \circ p =
     (p_w^2 + p_x^2 - p_y^2 - p_z^2) + \vec{i} (2 p_w p_x - 2 p_y p_z)
 \mathnewlineeq[p \circ p]
-  + \vec{j} (2 p_w q_y + 2 p_x q_z) + \vec{k} (2 p_w q_z + 2 p_x q_y)
+  + \vec{j} (2 p_w p_y + 2 p_x p_z) + \vec{k} (2 p_w p_z + 2 p_x p_y)
 \end{array}
 \end{equation*}
 
@@ -683,18 +684,18 @@ from $Q_1(\vec{v})$, i.e.~from equation~(\ref{eq:posz-q}),
 otherwise from $Q_{1/2}(\vec{v})$.
 
 %% \bigskip
-%% \item[$Q(v)^2$ for the definition of equation~(\ref{eq:posz-q})]
+%% \item[$Q(\vec{v})^2$ for the definition of equation~(\ref{eq:posz-q})]
 %% \begin{equation*}
-%% Q(v)^2 =
+%% Q(\vec{v})^2 =
 %%   (x^2-y^2-z^2) + \frac{2xz}{\sqrt{x^2+y^2}} (-\vec{i} y + \vec{j} x)
 %%   + 2\vec{k}xy
 %% \end{equation*}
-%% \noindent This is slightly faster than computing $Q(v)$ and then squaring,
+%% \noindent This is slightly faster than computing $Q(\vec{v})$ and then squaring,
 %% due to the simplifications in the $q_w$ term.  It can be used to compute
 %% the Mandelbulb for $n=4$.
 %% 
 %% \bigskip
-%% \item[Real part of $Q(v)^4$ for the definition of equation~(\ref{eq:posz-q})]
+%% \item[Real part of $Q(\vec{v})^4$ for the definition of equation~(\ref{eq:posz-q})]
 %% \begin{equation*}
 %% \mathrm{Re}~Q(v)^4 = (x^2-y^2-z^2)^2 - 4x^2 y^2 -4 x^2 z^2
 %% \end{equation*}
