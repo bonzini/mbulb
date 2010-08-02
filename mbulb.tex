@@ -372,19 +372,18 @@ than $2$, we get:
 It is easy to show that putting $q=\vec{v}$ gives the same
 result\footnote{Multiplying on the right by $\vec{-i}$ corresponds to
   adding a 180 degree rotation around the $x$ axis, which is
-  irrelevant because the transformed point always lies on that axis.
-  An interesting point in the resulting formula is that
-  $\vec{v}\vec{i}\vec{\bar v}$ is also a quaternion rotation, more
-  precisely a 180 degree rotation around axis $\vec{v}$.  In 2D this
-  is a reflection, so the result will always lie on the $xy$ plane,
-  even though the axis is not $\vec{k}$.}.  The elegant iteration that
-results, $\vec{v}\leftarrow\vec{v} \vec{i} \vec{\bar v}+\vec{c}$, can
-thus be seen as a \emph{quaternion formulation of the Mandelbrot set}.
-However, when drawn in 3D, it results simply in a ``lathed'' 2D
-Mandelbrot set.  So, for the sake of generalizing to three dimensions
-(and rediscovering the Mandelbulb in its quaternion form), we'll have
-to take a step back to equation~(\ref{eq:quat}), and see if it can be
-actually generalized to 3D.
+  irrelevant because the point being transformed is $\vec{i}$ and it
+  always lies on that axis.  An interesting point in the resulting formula
+  is that $\vec{v}\vec{i}\vec{\bar v}$ is also a quaternion rotation,
+  more precisely a 180 degree rotation around axis $\vec{v}$.  In 2D
+  this is a reflection, so the result will always lie on the $xy$ plane.}.
+The elegant iteration that results, $\vec{v}\leftarrow\vec{v} \vec{i}
+\vec{\bar v}+\vec{c}$, can thus be seen as a \emph{quaternion formulation
+of the Mandelbrot set}.  However, when drawn in 3D, it results simply in a
+``lathed'' 2D Mandelbrot set.  So, for the sake of generalizing to three
+dimensions (and rediscovering the Mandelbulb in its quaternion form),
+we'll have to take a step back to equation~(\ref{eq:quat}), and see if
+it can be actually generalized to 3D.
 
 \section{Rethinking the Mandelbulb}
 \label{sec:quatbulb}
